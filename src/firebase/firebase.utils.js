@@ -17,6 +17,27 @@ firebase.initializeApp(config);
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
 
+export const storeUserToDb = async (userAuth, additionalData) => {
+  if (!userAuth) {
+    return;
+  }
+  const userRef = firestore.doc(`/users/${userAuth.uid}`);
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    try {
+      await userRef.set({
+        displayName: userAuth.displayName,
+        email: userAuth.email,
+        createdAt: new Date(),
+        ...additionalData,
+      });
+    } catch (err) {
+      console.error('Unable to save data to db ', err.message);
+    }
+  }
+  return userRef;
+};
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
