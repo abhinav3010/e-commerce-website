@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { shopPageData } from './shop-page-data';
+import { SHOP_PAGE_DATA } from './shop-page-data';
 import Collection from './collection';
 function ShopPage(props) {
-  const [collectionData] = useState(shopPageData);
+  const [collectionData] = useState(SHOP_PAGE_DATA);
 
   return (
     <div className="shop-page">
