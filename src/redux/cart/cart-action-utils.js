@@ -20,3 +20,22 @@ export const addItemToCart = (cartItems, itemToAdd) => {
     },
   ];
 };
+
+export const removeItemFromCart = (cartItems, itemToRemove) => {
+  return cartItems.reduce((acc, item) => {
+    if (item.id === itemToRemove.id) {
+      if (item.quantity === 1) {
+        return acc;
+      }
+      return [...acc, { ...item, quantity: item.quantity - 1 }];
+    }
+    return [...acc, item];
+  }, []);
+};
+
+export const clearItemFromCart = (cartItems, itemToClear) => {
+  return cartItems.reduce(
+    (acc, item) => (item.id === itemToClear.id ? acc : [...acc, item]),
+    []
+  );
+};
