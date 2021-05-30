@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MenuItem from './menu-item';
-import { categoryMenuData } from './category-menu-data';
+import { connect } from 'react-redux';
+import { selectSectionsData } from '../../redux/sections/section-selectors';
+import { createStructuredSelector } from 'reselect';
 import './styles/category-menu.scss';
 
-const CategoryMenu = (props) => {
-  const [categoryItems] = useState(categoryMenuData);
-
+const CategoryMenu = ({ sectionsData }) => {
   return (
     <div className="category-menu">
-      {categoryItems.map((categoryItem) => (
-        <MenuItem
-          title={categoryItem.title}
-          imgUrl={categoryItem.imageUrl}
-          key={categoryItem.id}
-          size={categoryItem.size}
-        />
+      {sectionsData.map(({ title, imageUrl, id, size }) => (
+        <MenuItem title={title} imgUrl={imageUrl} key={id} size={size} />
       ))}
     </div>
   );
 };
+const mapStateToProps = createStructuredSelector({
+  sectionsData: selectSectionsData,
+});
 
-export default CategoryMenu;
+export default connect(mapStateToProps)(CategoryMenu);
