@@ -36,7 +36,7 @@ function App({ currentUser, setCurrentUser }) {
         <Route exact path="/">
           <CategoryMenu />
         </Route>
-        <Route exact path="/shop">
+        <Route path="/shop">
           <ShopPage />
         </Route>
         <Route exact path="/signin">

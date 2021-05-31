@@ -2,20 +2,20 @@ import React, { Fragment } from 'react';
 import Collection from './collection';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { selectCollectionData } from '../../redux/shop/shop-selectors';
+import { selectCollections } from '../../redux/shop/shop-selectors';
 
-const CollectionOverview = ({ collectionData }) => {
+const CollectionOverview = ({ collections }) => {
   return (
     <Fragment>
-      {collectionData.map(({ id, ...otherCollectionProps }) => {
-        return <Collection key={id} {...otherCollectionProps} />;
+      {collections.map(({ id, ...otherCollectionProps }) => {
+        return <Collection key={id} {...otherCollectionProps} itemCount={4} />;
       })}
     </Fragment>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  collectionData: selectCollectionData,
+  collections: selectCollections,
 });
 
 export default connect(mapStateToProps)(CollectionOverview);
