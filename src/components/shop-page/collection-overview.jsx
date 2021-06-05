@@ -7,7 +7,7 @@ import { selectCollections } from '../../redux/shop/shop-selectors';
 const CollectionOverview = ({ collections }) => {
   return (
     <Fragment>
-      {collections.map(({ id, ...otherCollectionProps }) => {
+      {Object.values(collections).map(({ id, ...otherCollectionProps }) => {
         return <Collection key={id} {...otherCollectionProps} itemCount={4} />;
       })}
     </Fragment>
